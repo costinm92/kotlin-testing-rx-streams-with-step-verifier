@@ -4,22 +4,19 @@ import com.example.model.Person
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import reactor.core.publisher.Mono
-import reactor.core.publisher.toMono
 import reactor.test.StepVerifier
 
 @SpringBootTest
 class MonoTests {
 
 	@Test
-	fun contextLoads() {
-	}
-
-	@Test
 	fun `mono - expect exact objectmatch`() {
-		val person = Person(
-			firstName = "Madalin",
-			lastName = "Costin"
-		).toMono()
+		val person = Mono.just(
+			Person(
+				firstName = "Madalin",
+				lastName = "Costin"
+			)
+		)
 
 		StepVerifier.create(person)
 			.expectNext(
@@ -33,10 +30,12 @@ class MonoTests {
 
 	@Test
 	fun `mono - expect property match`() {
-		val person = Person(
-			firstName = "Madalin",
-			lastName = "Costin"
-		).toMono()
+		val person = Mono.just(
+			Person(
+				firstName = "Madalin",
+				lastName = "Costin"
+			)
+		)
 
 		StepVerifier.create(person)
 			.expectNextMatches {
